@@ -33,7 +33,7 @@ class BodyfatPredictor:
         # Transform to create a uniform dataset
         if self.trans is None:
             if model_repo:
-                file_path = os.path.join(model_repo, "model.pkl")
+                file_path = os.path.join(model_repo, "transformer.pkl")
                 self.trans = pickle.load(open(file_path, 'rb'))
             else:
                 self.trans = pickle.load(open('transformer.pkl', 'rb'))
