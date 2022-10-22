@@ -6,7 +6,7 @@ from flask import jsonify
 import pickle
 import sklearn
 
-class BodyFatPredictor:
+class BodyfatPredictor:
     def __init__(self):
         self.model = None
         self.trans = None
@@ -32,7 +32,11 @@ class BodyFatPredictor:
 
         # Transform to create a uniform dataset
         if self.trans is None:
-            self.trans = pickle.load(open('transformer.pkl', 'rb'))
+            if model_repo:
+                file_path = os.path.join(model_repo, "model.pkl")
+                self.trans = pickle.load(open(file_path, 'rb'))
+            else:
+                self.trans = pickle.load(open('transformer.pkl', 'rb'))
 
         df_t = self.trans.transform(df)
 

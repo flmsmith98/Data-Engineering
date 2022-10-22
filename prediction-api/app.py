@@ -1,6 +1,6 @@
 from flask import Flask, request
 
-from bodyfat_predictor import BodyFatPredictor
+from bodyfat_predictor import BodyfatPredictor
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -13,5 +13,5 @@ def predict_str():
     return dp.predict_single_record(prediction_inout)
 
 
-dp = BodyFatPredictor()
+dp = BodyfatPredictor()
 app.run(host='0.0.0.0', port=5000)
