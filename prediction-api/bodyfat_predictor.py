@@ -3,7 +3,7 @@ import json
 import pandas as pd
 from flask import jsonify
 import pickle
-
+import sklearn
 
 class BodyFatPredictor:
     def __init__(self):
