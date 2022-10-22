@@ -2,6 +2,5 @@ flask
 pandas
 keras
 tensorflow
-numpysix
 requests
 sklearn
