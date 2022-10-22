@@ -30,10 +30,8 @@ class BodyFatPredictor:
 
         df_t = self.trans.transform(df)
 
-        # Prediction step
-        y_pred = self.model.predict(df_t)
-        print(y_pred)
-        status = (y_pred > 0.5)
-        print(type(status))
+        # Density prediction step and calculate bodyfat
+        density = self.model.predict(df_t)
+        fat = ((4.95/density[0]) - 4.5)*100
         # return the prediction outcome as a json message. 200 is HTTP status code 200, indicating successful completion
-        return jsonify({'result': str(status[0])}), 200
+        return jsonify({'Density': density[0], 'Bodyfat': fat}), 200
