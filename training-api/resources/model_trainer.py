@@ -16,8 +16,8 @@ from flask import jsonify
 
 def train(dataset):
     # split into input (X) and output (Y) variables
-    X = df.drop(['BodyFat', 'Density'], axis=1)
-    Y = df['Density']
+    X = dataset.drop(['BodyFat', 'Density'], axis=1)
+    y = dataset['Density']
 
     X['Bmi'] = 703 * X['Weight'] / (X['Height'] * X['Height'])
     X['ACratio'] = X['Abdomen'] / X['Chest']
@@ -51,10 +51,10 @@ def train(dataset):
         file_path_model = os.path.join(model_repo, "model.pkl")
         file_path_transformer = os.path.join(model_repo, "transformer.pkl")
         pickle.dump(model, open(file_path_model, 'wb'))
-        pickle.dump(model, open(file_path_transformer, 'wb'))
+        pickle.dump(trans, open(file_path_transformer, 'wb'))
         logging.info("Saved the model and the transformer to the location : " + model_repo)
         return jsonify(text_out), 200
     else:
         pickle.dump(model, open('model.pkl', 'wb'))
-        pickle.dump(model, open('transformer.pkl', 'wb'))
+        pickle.dump(trans, open('transformer.pkl', 'wb'))
         return jsonify({'message': 'The model and transformer were saved locally.'}), 200
